@@ -20,6 +20,10 @@ obj/
 *.booproj
 *.log
 
+#Seltsamme Dateien
+Library/CurrentLayout.dwlt
+Library/EditorInstance.json
+
 # ============ #
 # OS generated #
 # ============ #
