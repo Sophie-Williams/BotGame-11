@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 4610575509416718}
   - component: {fileID: 54368313597760880}
   - component: {fileID: 114243581611729738}
+  - component: {fileID: 114692106910932214}
   m_Layer: 0
   m_Name: Schuss
   m_TagString: projectile
@@ -142,6 +143,38 @@ MonoBehaviour:
   Schuetze: {fileID: 0}
   friendlyfire: 1
   leftPlayer: 0
+--- !u!114 &114692106910932214
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596029916430258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 228
+    i1: 206
+    i2: 210
+    i3: 93
+    i4: 206
+    i5: 252
+    i6: 156
+    i7: 84
+    i8: 187
+    i9: 100
+    i10: 31
+    i11: 41
+    i12: 229
+    i13: 254
+    i14: 137
+    i15: 209
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!136 &136595396005003288
 CapsuleCollider:
   m_ObjectHideFlags: 1

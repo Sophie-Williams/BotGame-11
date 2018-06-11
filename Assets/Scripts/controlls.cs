@@ -2,18 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class controlls : MonoBehaviour {
+public class controlls : NetworkBehaviour
+{
    
-    movement myMovement;
-    shoot myShoot;
+    public movement myMovement;
+    public shoot myShoot;
     // Use this for initialization
     void Start () {
+        
         myMovement = this.GetComponent<movement>();
         myShoot = this.GetComponentInChildren<shoot>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         if (myShoot == null)
         {
             myShoot = this.GetComponent<shoot>();
