@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     [SerializeField]
-    private string Name { get; }
+    private string Name;
     [SerializeField]
     private int Health = 1;
     [SerializeField]
-    private int TeamId { get; } = 0;
+    private int TeamId = 0;
 
     public Player(string pName, int pHealth, int pTeamId)
-    {
-      
+    {      
         Name = pName.Normalize();
         if(pHealth > 0)
         {
@@ -21,12 +20,22 @@ public class Player : MonoBehaviour {
         TeamId = pTeamId;
     }
 
-    string toString()
+    public int getTeamId()
+    {
+        return TeamId;
+    }
+
+    public string getName()
+    {
+        return Name;
+    }
+
+    public string toString()
     {
         return "{class:Player, Name = " + Name + ", Health = " + Health + ", TeamId = " + TeamId + "}";
     }
 
-    void takeDamage()
+    public void takeDamage()
     {
         if (Health > -1)
         {

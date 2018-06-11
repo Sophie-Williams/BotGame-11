@@ -5,13 +5,24 @@ using UnityEngine;
 public class controlls : MonoBehaviour {
    
     movement myMovement;
+    shoot myShoot;
     // Use this for initialization
     void Start () {
         myMovement = this.GetComponent<movement>();
+        myShoot = this.GetComponentInChildren<shoot>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (myShoot == null)
+        {
+            myShoot = this.GetComponent<shoot>();
+            if (myShoot == null)
+            {
+                Debug.Log("myShoot in controlls is null!");
+                return;
+            }
+        }
         if (myMovement == null)
         {
             myMovement = this.GetComponent<movement>();
@@ -38,6 +49,12 @@ public class controlls : MonoBehaviour {
         else if(Input.GetAxis("Vertical") < 0)
         {
             myMovement.backward();
+        }
+
+        if(Input.GetButtonDown("Fire1"))
+        {
+            //Debug.Log("Peng Peng");
+            myShoot.fire();
         }
 	}
 }
