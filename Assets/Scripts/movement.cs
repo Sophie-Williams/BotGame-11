@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 
-public class movement : MonoBehaviour {
+public class movement : NetworkBehaviour
+{
 
     public float rotSpeed = 1.0f;
     public float movementSpeed = 1.0f; 
@@ -13,6 +15,8 @@ public class movement : MonoBehaviour {
     {
         myRidgidbody = this.GetComponent<Rigidbody>();
     }
+
+  
 
     // Update is called once per frame
     void Update()

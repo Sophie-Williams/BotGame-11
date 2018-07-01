@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : NetworkBehaviour
+{
     [SerializeField]
+    [SyncVar]
     private string Name;
+    [SyncVar]
     [SerializeField]
     private int Health = 1;
     [SerializeField]
+    [SyncVar]
     private int TeamId = 0;
 
     public Player(string pName, int pHealth, int pTeamId)
@@ -52,7 +57,7 @@ public class Player : MonoBehaviour {
      **/
     void dead()
     {
-
+       
     }
 
     // Use this for initialization

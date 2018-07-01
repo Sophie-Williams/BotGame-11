@@ -58,7 +58,6 @@ GameObject:
   - component: {fileID: 33938871978994242}
   - component: {fileID: 136207217078176298}
   - component: {fileID: 23032353787208738}
-  - component: {fileID: 114967128771333724}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Player
@@ -97,6 +96,8 @@ GameObject:
   - component: {fileID: 114545519989559286}
   - component: {fileID: 114967305310827762}
   - component: {fileID: 114132939036019026}
+  - component: {fileID: 114197156681717044}
+  - component: {fileID: 114336022110725650}
   m_Layer: 0
   m_Name: Spieler
   m_TagString: Player
@@ -387,7 +388,45 @@ MonoBehaviour:
     i14: 22
     i15: 96
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114197156681717044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917535649741618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 2
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 1
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114336022110725650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917535649741618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d78ef36574963498746f004d1d51d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 54368313597760880, guid: e4ced25dcefc9c54bb641f29e5fe89d1,
+    type: 2}
+  speed: 10
+  shootDelay: 0.9
+  lastShoot: 0
+  Gun: {fileID: 0}
 --- !u!114 &114545519989559286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff37cc7340092934e8bfac1b961e44fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myMovement: {fileID: 0}
+  myShoot: {fileID: 0}
 --- !u!114 &114916508408994110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,22 +453,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotSpeed: 5.48
   movementSpeed: 20
---- !u!114 &114967128771333724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1434707739323702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d78ef36574963498746f004d1d51d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Projectile: {fileID: 54368313597760880, guid: e4ced25dcefc9c54bb641f29e5fe89d1,
-    type: 2}
-  speed: 10
-  shootDelay: 0.9
-  lastShoot: 0
 --- !u!114 &114967305310827762
 MonoBehaviour:
   m_ObjectHideFlags: 1

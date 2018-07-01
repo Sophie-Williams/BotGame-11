@@ -68,6 +68,7 @@ MonoBehaviour:
   m_OfflineScene: 
   m_OnlineScene: 
   m_SpawnPrefabs:
+  - {fileID: 1917535649741618, guid: c7909cce0820f7743aa9a75493661660, type: 2}
   - {fileID: 0}
   m_CustomConfig: 1
   m_MaxConnections: 4
@@ -137,5 +138,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   showGUI: 1
-  offsetX: 100
-  offsetY: 100
+  offsetX: 0
+  offsetY: 0

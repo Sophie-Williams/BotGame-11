@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 
 public class controlls : NetworkBehaviour
@@ -62,7 +63,7 @@ public class controlls : NetworkBehaviour
         if(Input.GetButtonDown("Fire1"))
         {
             //Debug.Log("Peng Peng");
-            myShoot.fire();
+            myShoot.CmdFire();
         }
 	}
 }

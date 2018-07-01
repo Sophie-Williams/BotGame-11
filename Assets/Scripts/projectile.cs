@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
+using UnityEngine.Networking;
 using UnityEngine;
 
-public class projectile : MonoBehaviour {
+public class projectile : NetworkBehaviour
+{
     [SerializeField]
     private int projectileSpeed = 10;
     public GameObject Schuetze;
