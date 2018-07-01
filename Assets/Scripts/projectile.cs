@@ -33,9 +33,9 @@ public class projectile : NetworkBehaviour
 
     void OnTriggerExit(Collider collision)
     {
-        Debug.Log("left");
-        Debug.Log(Schuetze);
-        Debug.Log(collision.transform.parent.gameObject);
+        //Debug.Log("left");
+        //Debug.Log(Schuetze);
+        //Debug.Log(collision.transform.parent.gameObject);
         if(collision.transform.parent.gameObject == Schuetze)
         {
             leftPlayer = true;

@@ -343,7 +343,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!65 &65179895567921408
 BoxCollider:
@@ -401,14 +401,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.1
+  m_SendInterval: 0.071428575
   m_SyncRotationAxis: 2
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 1
+  m_RotationSyncCompression: 1
+  m_SyncSpin: 0
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
-  m_InterpolateRotation: 1
+  m_InterpolateRotation: 20
   m_InterpolateMovement: 1
 --- !u!114 &114336022110725650
 MonoBehaviour:
@@ -451,8 +451,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782d693a3c9d5c243b5de38ad8ac2d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: 5.48
-  movementSpeed: 20
+  rotSpeed: 5.5
+  maxMovementSpeed: 10
+  acceleration: 20
 --- !u!114 &114967305310827762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -485,7 +486,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1425111098414114}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6b5f07419279e8c4b8f73f8bbca8ad65, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
