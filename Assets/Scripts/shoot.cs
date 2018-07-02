@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Networking;
+﻿using UnityEngine.Networking;
 using UnityEngine;
 
 public class shoot : NetworkBehaviour {
 
-    public Rigidbody Projectile;
+    public GameObject Projectile;
     public float speed = 10f;
     public double shootDelay = .9; //in Millisec
     public float lastShoot = 0;
@@ -38,7 +36,8 @@ public class shoot : NetworkBehaviour {
                     Debug.Log("Gun not found as a Child of the Player");
                 }
             }
-            Rigidbody projectileClone = Instantiate(Projectile, Gun.position, new Quaternion(Gun.rotation.x , Gun.rotation.y, Gun.rotation.z, Gun.rotation.w));
+
+            GameObject projectileClone = (GameObject) Instantiate(Projectile, Gun.position, Gun.rotation);
 
             projectileClone.GetComponent<projectile>().Schuetze = transform.gameObject;
 

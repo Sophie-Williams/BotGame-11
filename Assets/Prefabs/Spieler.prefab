@@ -401,14 +401,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.071428575
+  m_SendInterval: 0.033333335
   m_SyncRotationAxis: 2
-  m_RotationSyncCompression: 1
+  m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
-  m_InterpolateRotation: 20
+  m_InterpolateRotation: 50
   m_InterpolateMovement: 1
 --- !u!114 &114336022110725650
 MonoBehaviour:
@@ -421,8 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d78ef36574963498746f004d1d51d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 54368313597760880, guid: e4ced25dcefc9c54bb641f29e5fe89d1,
-    type: 2}
+  Projectile: {fileID: 1596029916430258, guid: e4ced25dcefc9c54bb641f29e5fe89d1, type: 2}
   speed: 10
   shootDelay: 0.9
   lastShoot: 0
