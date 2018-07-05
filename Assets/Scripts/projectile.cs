@@ -11,7 +11,7 @@ public class projectile : NetworkBehaviour
     public GameObject Schuetze;
 
     Rigidbody myRidgidbody;
-    public bool friendlyfire = true;
+    public bool friendlyfire = true;    //On means you can't hit teammates or yourself
     public bool leftPlayer = false;
     double length = 2;
 
@@ -24,6 +24,7 @@ public class projectile : NetworkBehaviour
     void Start ()
     {
         myRidgidbody = this.GetComponent<Rigidbody>();
+        
     }
 
     public int getProjectileSpeed()
@@ -44,10 +45,14 @@ public class projectile : NetworkBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
+        if (Schuetze == null)
+        {
+            Schuetze = collision.transform.parent.gameObject;
+        }
         if (collision.tag == "Player" && collision.transform.parent.gameObject != Schuetze ||
             collision.tag == "Player" && collision.transform.parent.gameObject == Schuetze && leftPlayer)
         {
-            if(friendlyfire && collision.transform.parent.GetComponent<Player>().getTeamId() == Schuetze.GetComponent<Player>().getTeamId() || 
+            if(friendlyfire && collision.transform.parent.GetComponent<Player>().getTeamId() != Schuetze.GetComponent<Player>().getTeamId() || 
                 !friendlyfire)
             {
                 collision.transform.parent.GetComponent<Player>().takeDamage();

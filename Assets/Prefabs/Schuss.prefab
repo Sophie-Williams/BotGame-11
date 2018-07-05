@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 10
   Schuetze: {fileID: 0}
-  friendlyfire: 1
+  friendlyfire: 0
   leftPlayer: 0
 --- !u!114 &114692106910932214
 MonoBehaviour:
