@@ -47,22 +47,42 @@ public class projectile : NetworkBehaviour
     {
         if (Schuetze == null)
         {
-            Schuetze = collision.transform.parent.GetComponent<status>();
+            Schuetze = FindStatus(collision.transform);
         }
 
-        Debug.Log("Schuetze status: " + Schuetze);
-        Debug.Log("OnTriggerEnter status: " + collision.transform.parent.GetComponent<status>());
-        if (collision.tag == "Player" && collision.transform.parent.GetComponent<status>() != Schuetze ||
-            collision.tag == "Player" && collision.transform.parent.GetComponent<status>() == Schuetze && leftPlayer)
+        //Debug.Log("Schuetze status: " + Schuetze);
+        //Debug.Log("OnTriggerEnter status: " + collision.transform.parent.GetComponent<status>());
+        if (collision.tag == "Player")
         {
-            if(friendlyfire && collision.transform.GetComponent<status>() != Schuetze || 
-                !friendlyfire)
+            status ColliderStatus = FindStatus(collision.transform);
+            if(ColliderStatus == null)
             {
-                collision.transform.parent.GetComponent<status>().takeDamage();
-                Schuetze.score += 1;
-                DestroyObject(transform.gameObject);
+                Debug.Log("Player Without Collider Error!!!!!");
+                
+            }
+
+            if (ColliderStatus != Schuetze ||
+                ColliderStatus == Schuetze && leftPlayer)
+            {
+                if (friendlyfire && ColliderStatus != Schuetze ||
+                    !friendlyfire)
+                {
+                    ColliderStatus.takeDamage();
+                    Schuetze.score += 1;
+                    DestroyObject(transform.gameObject);
+                }
             }
         }
+    }
+
+    public status FindStatus(Transform pTransform)
+    {
+        status tempStatus = pTransform.GetComponent<status>();
+        if (tempStatus == null)
+            tempStatus = pTransform.GetComponentInParent<status>();
+        if (tempStatus == null)
+            tempStatus = pTransform.GetComponentInChildren<status>();
+        return tempStatus;
     }
 
     void OnTriggerStay(Collider collision)
