@@ -8,14 +8,14 @@ public class projectile : NetworkBehaviour
 {
     [SerializeField]
     private int projectileSpeed = 10;
-    public GameObject Schuetze;
+    public status Schuetze;
 
     Rigidbody myRidgidbody;
     public bool friendlyfire = true;    //On means you can't hit teammates or yourself
     public bool leftPlayer = false;
     double length = 2;
 
-    void Projectile(GameObject absender)
+    void Projectile(status absender)
     {
         Schuetze = absender;
     }
@@ -47,15 +47,19 @@ public class projectile : NetworkBehaviour
     {
         if (Schuetze == null)
         {
-            Schuetze = collision.transform.parent.gameObject;
+            Schuetze = collision.transform.parent.GetComponent<status>();
         }
-        if (collision.tag == "Player" && collision.transform.parent.gameObject != Schuetze ||
-            collision.tag == "Player" && collision.transform.parent.gameObject == Schuetze && leftPlayer)
+
+        Debug.Log("Schuetze status: " + Schuetze);
+        Debug.Log("OnTriggerEnter status: " + collision.transform.parent.GetComponent<status>());
+        if (collision.tag == "Player" && collision.transform.parent.GetComponent<status>() != Schuetze ||
+            collision.tag == "Player" && collision.transform.parent.GetComponent<status>() == Schuetze && leftPlayer)
         {
-            if(friendlyfire && collision.transform.parent.GetComponent<Player>().getTeamId() != Schuetze.GetComponent<Player>().getTeamId() || 
+            if(friendlyfire && collision.transform.GetComponent<status>() != Schuetze || 
                 !friendlyfire)
             {
                 collision.transform.parent.GetComponent<status>().takeDamage();
+                Schuetze.score += 1;
                 DestroyObject(transform.gameObject);
             }
         }

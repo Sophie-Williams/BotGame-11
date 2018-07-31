@@ -1,48 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine;
+using Prototype.NetworkLobby;
+using System.Collections;
+using System.Collections.Generic;
 
 public class gameManagerScript : NetworkBehaviour
 {
 
-    ArrayList Players;
+    static public List<status> sCharacters = new List<status>();
+    static public gameManagerScript sInstance = null;
 
+    protected bool _running = true;
 
+    public GameObject uiScoreZone;
+    public Font uiScoreFont;
 
-    // Use this for initialization
+    void Awake()
+    {
+        sInstance = this;
+    }
+
     void Start()
     {
-        Players = new ArrayList();
+        for (int i = 0; i < sCharacters.Count; ++i)
+        {
+            sCharacters[i].Init();
+        }
     }
 
-    public void ready(NetworkIdentity pNetworkIdentity)
+    IEnumerator ReturnToLoby()
     {
-        Players.Add(pNetworkIdentity);
-        CmdStartRound();
+        _running = false;
+        yield return new WaitForSeconds(3.0f);
+        LobbyManager.s_Singleton.ServerReturnToLobby();
     }
-   
-    public void AddPlayer(Player pPlayer)
-    {
-        Players.Add(pPlayer);
-       // startRound();
-    }
+
 
     // Update is called once per frame
     void Update()
     {
+        if (!_running || sCharacters.Count == 1)
+            return;
 
-    }
-
-    [Command]
-    void CmdStartRound()
-    {
-        foreach (NetworkIdentity curPlayer in Players)
+        int aliveCount = 0;
+        for (int i = 0; i < sCharacters.Count; ++i)
         {
-            Debug.Log(curPlayer.GetComponent<Player>().getName() + " started Round");
-            //curPlayer.GetComponentInChildren<status>().reset(3);
+            if(sCharacters[i].isAlive())
+                aliveCount += 1;
+        }
 
-            curPlayer.transform.Find("IngameCharacter").gameObject.SetActive(true);
+        if (aliveCount < 2)
+        {
+            StartCoroutine(ReturnToLoby());
         }
     }
 }

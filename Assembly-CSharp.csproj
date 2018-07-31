@@ -71,9 +71,7 @@
      <Compile Include="Assets\Scripts\constants.cs" />
      <Compile Include="Assets\Scripts\controlls.cs" />
      <Compile Include="Assets\Scripts\gameManagerScript.cs" />
-     <Compile Include="Assets\Scripts\LiveScoreboard.cs" />
      <Compile Include="Assets\Scripts\movement.cs" />
-     <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\projectile.cs" />
      <Compile Include="Assets\Scripts\shoot.cs" />
      <Compile Include="Assets\Scripts\status.cs" />

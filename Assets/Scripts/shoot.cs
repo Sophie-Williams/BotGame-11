@@ -39,7 +39,7 @@ public class shoot : NetworkBehaviour {
 
             GameObject projectileClone = (GameObject) Instantiate(Projectile, Gun.position, Gun.rotation);
 
-            projectileClone.GetComponent<projectile>().Schuetze = transform.gameObject;
+            projectileClone.GetComponent<projectile>().Schuetze = GetComponent<status>();
 
             NetworkServer.Spawn(projectileClone.gameObject);
             lastShoot = Time.time;
