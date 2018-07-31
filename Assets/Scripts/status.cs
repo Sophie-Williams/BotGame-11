@@ -17,6 +17,7 @@ public class status : NetworkBehaviour
     [SyncVar]
     public int lifeCount = 3;
 
+    [SerializeField]
     protected Text _scoreText;
 
     [SerializeField]
@@ -33,7 +34,25 @@ public class status : NetworkBehaviour
         gameManagerScript.sCharacters.Add(this);
     }
 
-    public void Init()
+    void Start()
+    { 
+        Renderer[] rends = GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in rends)
+        {
+            //Debug.Log("Material.name: "+ r.material.name);
+            if (r.material.name.Contains("PlayerShere") || r.material.name.Contains("Spieler"))
+            {
+                r.material.color = color;
+            }
+        }
+
+        if (NetworkGameManager.sInstance != null)
+        {//we MAY be awake late (see comment on _wasInit above), so if the instance is already there we init
+            Init();
+        }
+    }
+
+public void Init()
     {
         if (_wasInit)
             return;
@@ -58,7 +77,7 @@ public class status : NetworkBehaviour
     // --- Score & Life management & display
     void OnScoreChanged(int newValue)
     {
-        Debug.Log("OnScoreChanged");
+       // Debug.Log("OnScoreChanged");
         score = newValue;
         UpdateScoreLifeText();
     }
@@ -114,3 +133,4 @@ public class status : NetworkBehaviour
 		
 	}
 }
+
