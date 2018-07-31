@@ -14,7 +14,7 @@ public class status : NetworkBehaviour
     public Color color;
     [SyncVar]
     public string playerName;
-    [SyncVar(hook = "OnLifeChanged")]
+    [SyncVar]
     public int lifeCount = 3;
 
     protected Text _scoreText;
@@ -58,15 +58,11 @@ public class status : NetworkBehaviour
     // --- Score & Life management & display
     void OnScoreChanged(int newValue)
     {
+        Debug.Log("OnScoreChanged");
         score = newValue;
         UpdateScoreLifeText();
     }
 
-    void OnLifeChanged(int newValue)
-    {
-        lifeCount = newValue;
-        UpdateScoreLifeText();
-    }
 
     void UpdateScoreLifeText()
     {
@@ -88,10 +84,11 @@ public class status : NetworkBehaviour
         if (lifeCount > -1)
         {
             lifeCount = lifeCount - 1;
+            UpdateScoreLifeText();
         }
         if (lifeCount == 0)
         {
-            dead();
+            CmdDead();
         }
     }
 
@@ -105,7 +102,8 @@ public class status : NetworkBehaviour
     /**
      *  Called once upon death (Health == 0)
      **/
-    void dead()
+    [Command]
+    void CmdDead()
     {
         alive = false;
         gameObject.SetActive(false);
