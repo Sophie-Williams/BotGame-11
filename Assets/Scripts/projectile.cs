@@ -55,7 +55,7 @@ public class projectile : NetworkBehaviour
             if(friendlyfire && collision.transform.parent.GetComponent<Player>().getTeamId() != Schuetze.GetComponent<Player>().getTeamId() || 
                 !friendlyfire)
             {
-                collision.transform.parent.GetComponent<Player>().takeDamage();
+                collision.transform.parent.GetComponent<status>().takeDamage();
                 DestroyObject(transform.gameObject);
             }
         }

@@ -8,22 +8,24 @@ public class Player : NetworkBehaviour
     [SerializeField]
     [SyncVar]
     private string Name;
-    [SyncVar]
-    [SerializeField]
-    private int Health = 1;
+
     [SerializeField]
     [SyncVar]
     private int TeamId = 0;
 
-    public Player(string pName, int pHealth, int pTeamId)
+    public void setPlayerOptions(string pName, int pTeamId)
     {      
         Name = pName.Normalize();
-        if(pHealth > 0)
-        {
-            Health = pHealth;
-        }
         TeamId = pTeamId;
+        CmdReady();
     }
+
+    [Command]
+    private void CmdReady()
+    {
+        FindObjectOfType<gameManagerScript>().ready(GetComponent<NetworkIdentity>());
+    }
+    
 
     public int getTeamId()
     {
@@ -37,27 +39,7 @@ public class Player : NetworkBehaviour
 
     public string toString()
     {
-        return "{class:Player, Name = " + Name + ", Health = " + Health + ", TeamId = " + TeamId + "}";
-    }
-
-    public void takeDamage()
-    {
-        if (Health > -1)
-        {
-            Health = Health - 1;
-        }
-        if(Health == 0)
-        {
-            dead();
-        }
-    }
-
-    /**
-     *  Called once upon death (Health == 0)
-     **/
-    void dead()
-    {
-       
+        return "{class:Player, Name = " + Name + ", TeamId = " + TeamId + "}";
     }
 
     // Use this for initialization
@@ -69,4 +51,6 @@ public class Player : NetworkBehaviour
 	void Update () {
 		
 	}
+
+    
 }
