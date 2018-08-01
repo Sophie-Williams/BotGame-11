@@ -71,7 +71,7 @@ public class projectile : NetworkBehaviour
                 if (friendlyfire && ColliderStatus != Schuetze ||
                     !friendlyfire)
                 {
-                    ColliderStatus.takeDamage();
+                    ColliderStatus.RpcTakeDamage();
                     Schuetze.score += 1;
                     //Debug.Log("Player took damage: " + ColliderStatus.GetInstanceID() + " he was hit at: " + collision.name + " , Time: "+ Time.time);
                     DestroyObject(transform.gameObject);

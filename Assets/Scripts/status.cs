@@ -15,7 +15,7 @@ public class status : NetworkBehaviour
     [SyncVar]
     public string playerName;
     [SyncVar]
-    public int lifeCount = 3;
+    public int lifeCount;
 
     [SerializeField]
     protected Text _scoreText;
@@ -34,6 +34,14 @@ public class status : NetworkBehaviour
         gameManagerScript.sCharacters.Add(this);
     }
 
+    void Update()
+    {
+        if(_wasInit == false)
+        {
+            Init();
+        }
+    }
+
     void Start()
     { 
         Renderer[] rends = GetComponentsInChildren<Renderer>();
@@ -45,14 +53,17 @@ public class status : NetworkBehaviour
                 r.material.color = color;
             }
         }
-
+        if (GetComponent<Collider>() != null)
+        {
+            GetComponent<Collider>().enabled = isServer;
+        }
         if (NetworkGameManager.sInstance != null)
         {//we MAY be awake late (see comment on _wasInit above), so if the instance is already there we init
             Init();
         }
     }
 
-public void Init()
+    public void Init()
     {
         if (_wasInit)
             return;
@@ -67,12 +78,13 @@ public void Init()
         _wasInit = true;
 
         transform.SetParent(GameObject.Find("Players").transform);
-
+        gameManagerScript.sCharacters.Add(this);
         UpdateScoreLifeText();
     }
 
     void OnDestroy()
     {
+        Debug.Log("OnDestroy() of status");
         gameManagerScript.sCharacters.Remove(this);
     }
 
@@ -100,7 +112,9 @@ public void Init()
         return lifeCount;
     }
 
-    public void takeDamage()
+
+    [ClientRpc]
+    public void RpcTakeDamage()
     {
         if (lifeCount > -1)
         {
@@ -111,7 +125,7 @@ public void Init()
         }
         if (lifeCount == 0)
         {
-            CmdDead();
+            died();
         }
     }
 
@@ -125,16 +139,13 @@ public void Init()
     /**
      *  Called once upon death (Health == 0)
      **/
-    [Command]
-    void CmdDead()
+    void died()
     {
         alive = false;
         gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+
 }
 

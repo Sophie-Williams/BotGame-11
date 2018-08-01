@@ -22,6 +22,7 @@ public class gameManagerScript : NetworkBehaviour
 
     void Start()
     {
+        Debug.Log("Start gameManagerScript Character count: " + sCharacters.Count);
         for (int i = 0; i < sCharacters.Count; ++i)
         {
             sCharacters[i].Init();
@@ -30,18 +31,15 @@ public class gameManagerScript : NetworkBehaviour
 
     IEnumerator ReturnToLoby()
     {
+        Debug.Log("Return To Lobby");
         _running = false;
         yield return new WaitForSeconds(3.0f);
         LobbyManager.s_Singleton.ServerReturnToLobby();
     }
 
 
-    // Update is called once per frame
     void Update()
     {
-        if (!_running || sCharacters.Count == 1)
-            return;
-
         int aliveCount = 0;
         for (int i = 0; i < sCharacters.Count; ++i)
         {
@@ -54,4 +52,13 @@ public class gameManagerScript : NetworkBehaviour
             StartCoroutine(ReturnToLoby());
         }
     }
+    
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        Debug.Log("OnStartClient");
+        
+
+    }
+
 }
