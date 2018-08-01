@@ -11,12 +11,15 @@ a) Without bots:
 6. the last man standing won. Than you get placed back in the lobby.
 
 b) With bots (not jet implemented)
-1. create your C# script to controll you character (it will replace the controlls script in the IngameCharacter Prefab) and 
-2. As the name you enter: "BOT:" and than the name of your bot behind it. Some code that has jet to be created will than load your bot and will replace the controlls script with your bot.
-3. Watch and have fun.
+1. create your C# script to controll you character (it will replace the controlls script in the IngameCharacter Prefab)
+2. Edit the GameLobbyHook Script to replace the controlls with your botscript (like firstbot)
+2. As the name you enter: "BOT:" and than the name of your bot behind it. (for example "BOT:firstbot")
+3. Watch and have fun / bugfix / ragequit / improve
 
 
 Notes:
 -Ignore everything in the SampleScenes Folder it is from the Lobby Example. The code is not run but it helps to understand the multiplayer stuff. It will be removed later
+
+-You can add multiple Players in the Lobby (current limit 2) so you don't have to build the application everytime.
 
 Last edited: 1.8.2018
