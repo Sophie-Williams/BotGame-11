@@ -12,6 +12,7 @@ public class gameManagerScript : NetworkBehaviour
 
     protected bool _running = true;
 
+    bool justStarted = true;
     public GameObject uiScoreZone;
     public Font uiScoreFont;
 
@@ -22,6 +23,7 @@ public class gameManagerScript : NetworkBehaviour
 
     void Start()
     {
+        Debug.Log("Start gameManagerScript Character count: " + sCharacters.Count);
         for (int i = 0; i < sCharacters.Count; ++i)
         {
             sCharacters[i].Init();
@@ -30,28 +32,39 @@ public class gameManagerScript : NetworkBehaviour
 
     IEnumerator ReturnToLoby()
     {
+        Debug.Log("Return To Lobby Time: " + Time.time);
         _running = false;
         yield return new WaitForSeconds(3.0f);
         LobbyManager.s_Singleton.ServerReturnToLobby();
     }
 
 
-    // Update is called once per frame
     void Update()
     {
-        if (!_running || sCharacters.Count == 1)
+        if(!_running)
+        {
             return;
-
+        }
         int aliveCount = 0;
         for (int i = 0; i < sCharacters.Count; ++i)
         {
             if(sCharacters[i].isAlive())
                 aliveCount += 1;
         }
-
-        if (aliveCount < 2)
+        //Debug.Log("sCharacters.Count: " + sCharacters.Count + " aliveCount: " + aliveCount);
+        if (aliveCount < 2 && !justStarted)
         {
             StartCoroutine(ReturnToLoby());
         }
+        justStarted = false;
     }
+    
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        Debug.Log("OnStartClient");
+        
+
+    }
+
 }

@@ -3063,7 +3063,7 @@ MonoBehaviour:
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 1
-  m_PlayerSpawnMethod: 0
+  m_PlayerSpawnMethod: 1
   m_OfflineScene: Lobby
   m_OnlineScene: 
   m_SpawnPrefabs:
@@ -3134,7 +3134,7 @@ MonoBehaviour:
   m_LobbyScene: Lobby
   m_PlayScene: Beispielscene
   lobbySlots: []
-  prematchCountdown: 3
+  prematchCountdown: 0
   topPanel: {fileID: 1724359771}
   mainMenuPanel: {fileID: 251351756}
   lobbyPanel: {fileID: 1402839167}

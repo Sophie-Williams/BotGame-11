@@ -15,7 +15,7 @@ public class status : NetworkBehaviour
     [SyncVar]
     public string playerName;
     [SyncVar]
-    public int lifeCount = 3;
+    public int lifeCount;
 
     [SerializeField]
     protected Text _scoreText;
@@ -32,10 +32,35 @@ public class status : NetworkBehaviour
     {
         //register the spaceship in the gamemanager, that will allow to loop on it.
         gameManagerScript.sCharacters.Add(this);
+      
+    }
+
+    void Update()
+    {
+        if(_wasInit == false)
+        {
+            Init();
+        }
     }
 
     void Start()
-    { 
+    {
+        if (playerName.StartsWith("BOT:"))
+        {
+            switch (playerName.Substring(4).ToLower())
+            {
+                case "firstbot":
+                    gameObject.AddComponent<firstBot>();
+                    Destroy(gameObject.GetComponent<controlls>());
+
+                    break;
+                default:
+                    Debug.Log("The Bot was not found. Botname: " + playerName.Substring(4).ToLower());
+                    break;
+
+            }
+        }
+
         Renderer[] rends = GetComponentsInChildren<Renderer>();
         foreach (Renderer r in rends)
         {
@@ -45,14 +70,14 @@ public class status : NetworkBehaviour
                 r.material.color = color;
             }
         }
-
+        
         if (NetworkGameManager.sInstance != null)
         {//we MAY be awake late (see comment on _wasInit above), so if the instance is already there we init
             Init();
         }
     }
 
-public void Init()
+    public void Init()
     {
         if (_wasInit)
             return;
@@ -68,11 +93,23 @@ public void Init()
 
         transform.SetParent(GameObject.Find("Players").transform);
 
+        if(!gameManagerScript.sCharacters.Contains(this))
+        {
+            gameManagerScript.sCharacters.Add(this);
+            Debug.Log("not already in Characters ID: " + this.GetInstanceID() + " isServer: " + isServer);
+        }
+        else
+        {
+            Debug.Log("already in Characters ID: " + this.GetInstanceID() + " isServer: "+ isServer);
+        }
+       
         UpdateScoreLifeText();
     }
 
     void OnDestroy()
     {
+        Debug.Log("OnDestroy() of status");
+        Debug.Log(System.Environment.StackTrace);
         gameManagerScript.sCharacters.Remove(this);
     }
 
@@ -100,7 +137,9 @@ public void Init()
         return lifeCount;
     }
 
-    public void takeDamage()
+
+    [ClientRpc]
+    public void RpcTakeDamage()
     {
         if (lifeCount > -1)
         {
@@ -111,7 +150,7 @@ public void Init()
         }
         if (lifeCount == 0)
         {
-            CmdDead();
+            died();
         }
     }
 
@@ -125,16 +164,13 @@ public void Init()
     /**
      *  Called once upon death (Health == 0)
      **/
-    [Command]
-    void CmdDead()
+    void died()
     {
         alive = false;
         gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+
 }
 
