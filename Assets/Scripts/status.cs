@@ -45,7 +45,8 @@ public class status : NetworkBehaviour
 
     void Start()
     {
-        if (playerName.StartsWith("BOT:"))
+        
+        if (playerName.StartsWith("BOT:") && GetComponent<NetworkIdentity>().hasAuthority)
         {
             switch (playerName.Substring(4).ToLower())
             {
