@@ -14,6 +14,7 @@ public class projectile : NetworkBehaviour
     public bool friendlyfire = true;    //On means you can't hit teammates or yourself
     public bool leftPlayer = false;
     double length = 2;
+    bool hit = false;       //This prevents the projectile to hit multiple targets at once
 
     void Projectile(status absender)
     {
@@ -32,6 +33,7 @@ public class projectile : NetworkBehaviour
         return projectileSpeed;
     }
 
+    [Server]
     void OnTriggerExit(Collider collision)
     {
         //Debug.Log("left");
@@ -43,6 +45,7 @@ public class projectile : NetworkBehaviour
         }
     }
 
+    [Server]
     void OnTriggerEnter(Collider collision)
     {
         if (Schuetze == null)
@@ -52,7 +55,7 @@ public class projectile : NetworkBehaviour
 
         //Debug.Log("Schuetze status: " + Schuetze);
         //Debug.Log("OnTriggerEnter status: " + collision.transform.parent.GetComponent<status>());
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && !hit)
         {
             status ColliderStatus = FindStatus(collision.transform);
             if(ColliderStatus == null)
@@ -60,6 +63,7 @@ public class projectile : NetworkBehaviour
                 Debug.Log("Player Without Collider Error!!!!!");
                 
             }
+
 
             if (ColliderStatus != Schuetze ||
                 ColliderStatus == Schuetze && leftPlayer)
@@ -69,12 +73,16 @@ public class projectile : NetworkBehaviour
                 {
                     ColliderStatus.takeDamage();
                     Schuetze.score += 1;
-                    //Debug.Log("Player took damage: " + ColliderStatus.playerName);
+                    //Debug.Log("Player took damage: " + ColliderStatus.GetInstanceID() + " he was hit at: " + collision.name + " , Time: "+ Time.time);
                     DestroyObject(transform.gameObject);
-                    
+                    hit = true;
                 }
             }
         }
+       /* else if(collision.tag == "Player" && hit)
+        {
+            Debug.Log("DoubleHit prevented: " + FindStatus(collision.transform).GetInstanceID() + " he was hit at: " + collision.name + " , Time: " + Time.time);
+        }*/
     }
 
     public status FindStatus(Transform pTransform)
@@ -87,6 +95,7 @@ public class projectile : NetworkBehaviour
         return tempStatus;
     }
 
+    [Server]
     void OnTriggerStay(Collider collision)
     {
         if (collision.tag == "Wall")
