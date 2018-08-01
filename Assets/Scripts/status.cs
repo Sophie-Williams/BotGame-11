@@ -32,6 +32,7 @@ public class status : NetworkBehaviour
     {
         //register the spaceship in the gamemanager, that will allow to loop on it.
         gameManagerScript.sCharacters.Add(this);
+      
     }
 
     void Update()
@@ -43,7 +44,23 @@ public class status : NetworkBehaviour
     }
 
     void Start()
-    { 
+    {
+        if (playerName.StartsWith("BOT:"))
+        {
+            switch (playerName.Substring(4).ToLower())
+            {
+                case "firstbot":
+                    gameObject.AddComponent<firstBot>();
+                    Destroy(gameObject.GetComponent<controlls>());
+
+                    break;
+                default:
+                    Debug.Log("The Bot was not found. Botname: " + playerName.Substring(4).ToLower());
+                    break;
+
+            }
+        }
+
         Renderer[] rends = GetComponentsInChildren<Renderer>();
         foreach (Renderer r in rends)
         {
@@ -53,10 +70,7 @@ public class status : NetworkBehaviour
                 r.material.color = color;
             }
         }
-        if (GetComponent<Collider>() != null)
-        {
-            GetComponent<Collider>().enabled = isServer;
-        }
+        
         if (NetworkGameManager.sInstance != null)
         {//we MAY be awake late (see comment on _wasInit above), so if the instance is already there we init
             Init();
@@ -78,13 +92,24 @@ public class status : NetworkBehaviour
         _wasInit = true;
 
         transform.SetParent(GameObject.Find("Players").transform);
-        gameManagerScript.sCharacters.Add(this);
+
+        if(!gameManagerScript.sCharacters.Contains(this))
+        {
+            gameManagerScript.sCharacters.Add(this);
+            Debug.Log("not already in Characters ID: " + this.GetInstanceID() + " isServer: " + isServer);
+        }
+        else
+        {
+            Debug.Log("already in Characters ID: " + this.GetInstanceID() + " isServer: "+ isServer);
+        }
+       
         UpdateScoreLifeText();
     }
 
     void OnDestroy()
     {
         Debug.Log("OnDestroy() of status");
+        Debug.Log(System.Environment.StackTrace);
         gameManagerScript.sCharacters.Remove(this);
     }
 

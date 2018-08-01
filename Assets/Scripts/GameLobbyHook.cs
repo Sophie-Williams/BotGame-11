@@ -10,7 +10,7 @@ public class GameLobbyHook : LobbyHook
         LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
         status Status = gamePlayer.GetComponent<status>();
 
-       if(lobby.playerName.StartsWith("BOT:"))
+       /*if(lobby.playerName.StartsWith("BOT:"))
         {
             switch(lobby.playerName.Substring(4).ToLower())
             {
@@ -22,7 +22,7 @@ public class GameLobbyHook : LobbyHook
                     break;
                     
                 }
-        }
+        }*/
 
         Status.playerName = lobby.playerName;
         Status.color = lobby.playerColor;

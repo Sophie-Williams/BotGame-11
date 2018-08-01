@@ -12,6 +12,7 @@ public class gameManagerScript : NetworkBehaviour
 
     protected bool _running = true;
 
+    bool justStarted = true;
     public GameObject uiScoreZone;
     public Font uiScoreFont;
 
@@ -31,7 +32,7 @@ public class gameManagerScript : NetworkBehaviour
 
     IEnumerator ReturnToLoby()
     {
-        Debug.Log("Return To Lobby");
+        Debug.Log("Return To Lobby Time: " + Time.time);
         _running = false;
         yield return new WaitForSeconds(3.0f);
         LobbyManager.s_Singleton.ServerReturnToLobby();
@@ -40,17 +41,22 @@ public class gameManagerScript : NetworkBehaviour
 
     void Update()
     {
+        if(!_running)
+        {
+            return;
+        }
         int aliveCount = 0;
         for (int i = 0; i < sCharacters.Count; ++i)
         {
             if(sCharacters[i].isAlive())
                 aliveCount += 1;
         }
-
-        if (aliveCount < 2)
+        //Debug.Log("sCharacters.Count: " + sCharacters.Count + " aliveCount: " + aliveCount);
+        if (aliveCount < 2 && !justStarted)
         {
             StartCoroutine(ReturnToLoby());
         }
+        justStarted = false;
     }
     
     public override void OnStartClient()
