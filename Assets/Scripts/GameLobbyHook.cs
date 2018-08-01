@@ -9,7 +9,21 @@ public class GameLobbyHook : LobbyHook
     {
         LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
         status Status = gamePlayer.GetComponent<status>();
-       
+
+       if(lobby.playerName.StartsWith("BOT:"))
+        {
+            switch(lobby.playerName.Substring(4).ToLower())
+            {
+                case "firstbot": gamePlayer.AddComponent<firstBot>();
+                    Destroy(gamePlayer.GetComponent<controlls>());
+                    break;
+                default:
+                    Debug.Log("The Bot was not found. Botname: " + lobby.playerName.Substring(4).ToLower());
+                    break;
+                    
+                }
+        }
+
         Status.playerName = lobby.playerName;
         Status.color = lobby.playerColor;
         Status.score = 0;

@@ -66,6 +66,8 @@ public void Init()
         _scoreText.color = color;
         _wasInit = true;
 
+        transform.SetParent(GameObject.Find("Players").transform);
+
         UpdateScoreLifeText();
     }
 
@@ -102,7 +104,9 @@ public void Init()
     {
         if (lifeCount > -1)
         {
+           // Debug.Log("lifeCount reduced from " + lifeCount + " to " + lifeCount + "-1");
             lifeCount = lifeCount - 1;
+
             UpdateScoreLifeText();
         }
         if (lifeCount == 0)

@@ -69,7 +69,9 @@ public class projectile : NetworkBehaviour
                 {
                     ColliderStatus.takeDamage();
                     Schuetze.score += 1;
+                    //Debug.Log("Player took damage: " + ColliderStatus.playerName);
                     DestroyObject(transform.gameObject);
+                    
                 }
             }
         }
