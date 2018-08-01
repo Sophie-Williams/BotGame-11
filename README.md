@@ -12,7 +12,7 @@ a) Without bots:
 
 b) With bots (not jet implemented)
 1. create your C# script to controll you character (it will replace the controlls script in the IngameCharacter Prefab)
-2. Edit the GameLobbyHook Script to replace the controlls with your botscript (like firstbot)
+2. Edit the status Script to replace the controlls with your botscript (like firstbot)
 2. As the name you enter: "BOT:" and than the name of your bot behind it. (for example "BOT:firstbot")
 3. Watch and have fun / bugfix / ragequit / improve
 
@@ -22,4 +22,4 @@ Notes:
 
 -You can add multiple Players in the Lobby (current limit 2) so you don't have to build the application everytime.
 
-Last edited: 1.8.2018
+Last edited: 1.8.2018 - 15:57
