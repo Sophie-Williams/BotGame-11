@@ -25,7 +25,7 @@ public class projectile : NetworkBehaviour
     void Start ()
     {
         myRidgidbody = this.GetComponent<Rigidbody>();
-        
+        transform.SetParent(GameObject.Find("Projectiles").transform);
     }
 
     public int getProjectileSpeed()
