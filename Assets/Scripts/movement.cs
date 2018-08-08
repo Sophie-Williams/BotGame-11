@@ -6,9 +6,9 @@ using UnityEngine;
 public class movement : NetworkBehaviour
 {
 
-    public float rotSpeed = 1.0f;
-    public float maxMovementSpeed = 1.0f;
-    public float acceleration = 1.0f;
+    static public float rotSpeed = 1.0f;
+    static public float maxMovementSpeed = 1.0f;
+    static public float acceleration = 1.0f;
 
     Rigidbody myRidgidbody;
     // Use this for initialization
