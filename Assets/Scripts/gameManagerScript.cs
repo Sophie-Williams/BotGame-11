@@ -51,20 +51,23 @@ public class gameManagerScript : NetworkBehaviour
             if(sCharacters[i].isAlive())
                 aliveCount += 1;
         }
-        //Debug.Log("sCharacters.Count: " + sCharacters.Count + " aliveCount: " + aliveCount);
+        //At lest one other Player joined 
+        if(justStarted && aliveCount > 1)
+        {
+            justStarted = false;
+        }
+
         if (aliveCount < 2 && !justStarted)
         {
             StartCoroutine(ReturnToLoby());
         }
-        justStarted = false;
     }
     
     public override void OnStartClient()
     {
         base.OnStartClient();
+        justStarted = true;
         Debug.Log("OnStartClient");
-        
-
     }
 
 }

@@ -4,8 +4,7 @@ using UnityEngine;
 public class shoot : NetworkBehaviour {
 
     public GameObject Projectile;
-    public float speed = 10f;
-    public double shootDelay = .9; //in Millisec
+    static public double shootDelay = .9; //in Millisec
     public float lastShoot = 0;
     public Transform Gun;
 

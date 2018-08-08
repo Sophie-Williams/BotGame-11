@@ -169,7 +169,7 @@ public class status : NetworkBehaviour
     {
         alive = false;
         gameObject.SetActive(false);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 
 

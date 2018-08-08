@@ -7,11 +7,11 @@ using UnityEngine;
 public class projectile : NetworkBehaviour
 {
     [SerializeField]
-    private int projectileSpeed = 10;
+    static public int projectileSpeed = 10;
     public status Schuetze;
 
     Rigidbody myRidgidbody;
-    public bool friendlyfire = true;    //On means you can't hit teammates or yourself
+    static public bool friendlyfire = true;    //On means you can't hit teammates or yourself
     public bool leftPlayer = false;
     double length = 2;
     bool hit = false;       //This prevents the projectile to hit multiple targets at once

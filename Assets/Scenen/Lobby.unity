@@ -1915,7 +1915,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 127.0.0.1
+  m_Text: 
 --- !u!222 &470655040
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3125,7 +3125,7 @@ MonoBehaviour:
   matchMaker: {fileID: 0}
   m_ShowLobbyGUI: 0
   m_MaxPlayers: 4
-  m_MaxPlayersPerConnection: 2
+  m_MaxPlayersPerConnection: 4
   m_MinPlayers: 2
   m_LobbyPlayerPrefab: {fileID: 11487034, guid: ad727d7e1462ecc4f83c898ecc501997,
     type: 2}
@@ -3134,7 +3134,7 @@ MonoBehaviour:
   m_LobbyScene: Lobby
   m_PlayScene: Beispielscene
   lobbySlots: []
-  prematchCountdown: 0
+  prematchCountdown: 1
   topPanel: {fileID: 1724359771}
   mainMenuPanel: {fileID: 251351756}
   lobbyPanel: {fileID: 1402839167}
