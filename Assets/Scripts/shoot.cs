@@ -45,7 +45,7 @@ public class shoot : NetworkBehaviour {
         }
     }
 
-    bool canShoot()
+    public bool canShoot()
     {
         
         return lastShoot + shootDelay < Time.time;
